@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'hot_words.dart';
+import 'iconic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
@@ -19,6 +20,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 30.0,
           ),
+          Iconic(),
           HotWords(),
           const SizedBox(
             height: 30.0,
