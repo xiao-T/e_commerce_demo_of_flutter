@@ -22,6 +22,13 @@ class App extends StatelessWidget {
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.black38,
         ),
+        textTheme: const TextTheme(
+          displaySmall: TextStyle(
+            height: 1.4,
+            fontSize: 12,
+            color: Colors.black,
+          ),
+        ),
       ),
       routerConfig: shellRoute,
     );

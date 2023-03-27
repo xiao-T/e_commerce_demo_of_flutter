@@ -15,7 +15,6 @@ class CategoryPage extends StatelessWidget {
           const Text('Category page body'),
           ElevatedButton(
             onPressed: () {
-              print('tapped on category btn');
               GoRouter.of(context).go('/category/testId');
             },
             child: const Text('navigate to category detail page'),

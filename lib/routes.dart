@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import './scaffold_with_nav_bar.dart';
-import './pages/home.dart';
+import 'pages/home/home.dart';
 // category page
 import './pages/category/category.dart';
 import './pages/category/detail.dart';
@@ -27,27 +27,37 @@ final GoRouter shellRoute = GoRouter(
       routes: <RouteBase>[
         GoRoute(
           path: '/',
-          builder: (BuildContext context, GoRouterState state) {
-            return const HomePage(title: 'shell home page');
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(
+              child: HomePage(title: 'shell home page'),
+            );
           },
         ),
         GoRoute(
           path: '/category',
-          builder: (BuildContext context, GoRouterState state) {
-            return const CategoryPage();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(
+              child: CategoryPage(),
+            );
           },
           routes: <RouteBase>[
             GoRoute(
-                path: ':id',
-                builder: (BuildContext context, GoRouterState state) {
-                  return const CategoryDetail();
-                })
+              path: ':id',
+              parentNavigatorKey: _rootNavigatorKey,
+              builder: (BuildContext context, GoRouterState state) {
+                return CategoryDetail(
+                  categoryId: state.params['id']!,
+                );
+              },
+            )
           ],
         ),
         GoRoute(
           path: '/about',
-          builder: (BuildContext context, GoRouterState state) {
-            return const AboutPage();
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(
+              child: AboutPage(),
+            );
           },
         )
       ],
