@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'hot_words.dart';
 import 'iconic.dart';
 import 'new_arrival.dart';
+import 'top_sale.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
@@ -24,9 +25,7 @@ class HomePage extends StatelessWidget {
           Iconic(),
           const NewArrival(),
           HotWords(),
-          const SizedBox(
-            height: 30.0,
-          ),
+          const TopSale(),
           ElevatedButton(
             onPressed: () {
               context.go('/category');
