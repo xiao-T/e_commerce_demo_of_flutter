@@ -8,5 +8,4 @@ abstract class Styles {
     fontSize: 18.0,
     fontWeight: FontWeight.bold,
   );
-  static TextStyle subTitle = const TextStyle(fontSize: 16.0);
 }

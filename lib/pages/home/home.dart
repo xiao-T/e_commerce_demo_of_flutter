@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'hot_words.dart';
 import 'iconic.dart';
+import 'new_arrival.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
@@ -15,12 +16,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const SizedBox(
             height: 30.0,
           ),
           Iconic(),
+          const NewArrival(),
           HotWords(),
           const SizedBox(
             height: 30.0,
