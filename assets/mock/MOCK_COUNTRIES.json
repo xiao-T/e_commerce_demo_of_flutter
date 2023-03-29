@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "name": "Namibia",
+    "code": "NA"
+  },
+  {
+    "id": 3,
+    "name": "Russia",
+    "code": "RU"
+  },
+  {
+    "id": 4,
+    "name": "Kazakhstan",
+    "code": "KZ"
+  },
+  {
+    "id": 7,
+    "name": "Poland",
+    "code": "PL"
+  },
+  {
+    "id": 9,
+    "name": "Peru",
+    "code": "PE"
+  },
+  {
+    "id": 11,
+    "name": "Thailand",
+    "code": "TH"
+  },
+  {
+    "id": 12,
+    "name": "Serbia",
+    "code": "RS"
+  },
+  {
+    "id": 13,
+    "name": "Philippines",
+    "code": "PH"
+  },
+  {
+    "id": 14,
+    "name": "Luxembourg",
+    "code": "LU"
+  },
+  {
+    "id": 15,
+    "name": "Latvia",
+    "code": "LV"
+  },
+  {
+    "id": 16,
+    "name": "Croatia",
+    "code": "HR"
+  },
+  {
+    "id": 18,
+    "name": "Nigeria",
+    "code": "NG"
+  },
+  {
+    "id": 19,
+    "name": "Costa Rica",
+    "code": "CR"
+  },
+  {
+    "id": 20,
+    "name": "Indonesia",
+    "code": "ID"
+  },
+  {
+    "id": 22,
+    "name": "Ukraine",
+    "code": "UA"
+  },
+  {
+    "id": 23,
+    "name": "Sweden",
+    "code": "SE"
+  },
+  {
+    "id": 26,
+    "name": "Pakistan",
+    "code": "PK"
+  },
+  {
+    "id": 31,
+    "name": "Czech Republic",
+    "code": "CZ"
+  },
+  {
+    "id": 32,
+    "name": "Syria",
+    "code": "SY"
+  },
+  {
+    "id": 33,
+    "name": "Colombia",
+    "code": "CO"
+  },
+  {
+    "id": 36,
+    "name": "Slovenia",
+    "code": "SI"
+  },
+  {
+    "id": 38,
+    "name": "Armenia",
+    "code": "AM"
+  },
+  {
+    "id": 40,
+    "name": "Bulgaria",
+    "code": "BG"
+  },
+  {
+    "id": 41,
+    "name": "Denmark",
+    "code": "DK"
+  },
+  {
+    "id": 42,
+    "name": "Afghanistan",
+    "code": "AF"
+  },
+  {
+    "id": 45,
+    "name": "Sri Lanka",
+    "code": "LK"
+  },
+  {
+    "id": 46,
+    "name": "Japan",
+    "code": "JP"
+  },
+  {
+    "id": 49,
+    "name": "China",
+    "code": "CN"
+  },
+  {
+    "id": 50,
+    "name": "Brazil",
+    "code": "BR"
+  }
+]
