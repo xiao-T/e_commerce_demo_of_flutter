@@ -5,6 +5,7 @@ import 'hot_words.dart';
 import 'iconic.dart';
 import 'new_arrival.dart';
 import 'top_sale.dart';
+import 'hot_share.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
@@ -26,6 +27,7 @@ class HomePage extends StatelessWidget {
           const NewArrival(),
           HotWords(),
           const TopSale(),
+          HotShare(),
           ElevatedButton(
             onPressed: () {
               context.go('/category');

@@ -55,6 +55,7 @@ class ProductList extends StatelessWidget {
     for (var product in _products) {
       _productList.add(
         Container(
+          width: itemWidth,
           decoration: const BoxDecoration(
             border: Border(
               right: BorderSide(
@@ -76,6 +77,7 @@ class ProductList extends StatelessWidget {
               ),
               Text(
                 product['name'],
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               SizedBox(
