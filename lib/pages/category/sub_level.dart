@@ -5,6 +5,8 @@ import 'package:e_mall_demo/styles.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
+final debounce = Debounce(milliseconds: 100);
+List countryItemKeys = [];
 final subLevelContainer = GlobalKey();
 Future randomData(count) async {
   final countries = await readCountriesJSON();
@@ -17,16 +19,19 @@ Future randomData(count) async {
 }
 
 class SubLevel extends StatefulWidget {
-  const SubLevel({Key? key}) : super(key: key);
+  SubLevel({Key? key, this.onScrollCallback}) : super(key: key);
 
+  Function? onScrollCallback;
   @override
   State<SubLevel> createState() => _SubLevelState();
 }
 
 class _SubLevelState extends State<SubLevel> {
   List _countriesWithCities = [];
+  final ScrollController _scrollController = ScrollController();
 
-  List<Widget> _createSubCategoryItem(cities) {
+  // create city item layout
+  List<Widget> _createSubCityItem(cities) {
     final double? containerWidth = _getSubLevelContainerSize();
     // 4 = container's horizontal padding + item between gap
     final double itemWidth = (containerWidth! - (gap['m']! * 4)) / 3;
@@ -58,9 +63,14 @@ class _SubLevelState extends State<SubLevel> {
 
   List<Widget> _createListView() {
     List<Widget> list = [];
+    // reset list
+    countryItemKeys = [];
     for (var country in _countriesWithCities) {
+      final cityItemKey = GlobalKey(debugLabel: country['name']);
+      countryItemKeys.add(cityItemKey);
       list.add(
         Column(
+          key: cityItemKey,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -80,7 +90,7 @@ class _SubLevelState extends State<SubLevel> {
               child: Wrap(
                 spacing: gap['m']!,
                 children: [
-                  ..._createSubCategoryItem(country['cities']),
+                  ..._createSubCityItem(country['cities']),
                 ],
               ),
             ),
@@ -98,14 +108,52 @@ class _SubLevelState extends State<SubLevel> {
     return containerWidth;
   }
 
+  // scroll event
+  void _handleScrollEvent() {
+    debounce.run(() {
+      widget.onScrollCallback!(_findVisibleItem());
+    });
+  }
+
+  // get position of sub category item
+  Offset? _getItemPosition(GlobalKey key) {
+    RenderBox? renderBoxItem =
+        key.currentContext?.findRenderObject() as RenderBox?;
+    Offset? itemPosition = renderBoxItem?.localToGlobal(Offset.zero);
+    return itemPosition;
+  }
+
+  // layout completed callback
+  Map<String, dynamic> _findVisibleItem() {
+    Map<String, dynamic> currentCountry = {};
+    for (var i = 0; i < countryItemKeys.length; i++) {
+      GlobalKey key = countryItemKeys.elementAt(i);
+      Offset? offset = _getItemPosition(key);
+      if (offset != null && offset.dy > 0) {
+        currentCountry = _countriesWithCities.elementAt(i);
+        currentCountry['key'] = key;
+        currentCountry['offset'] = offset;
+        break;
+      }
+    }
+    return currentCountry;
+  }
+
   @override
   void initState() {
-    super.initState();
+    _scrollController.addListener(_handleScrollEvent);
     randomData(5).then((r) {
       setState(() {
         _countriesWithCities = r;
       });
     });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_handleScrollEvent);
+    super.dispose();
   }
 
   @override
@@ -114,8 +162,19 @@ class _SubLevelState extends State<SubLevel> {
       key: subLevelContainer,
       padding: EdgeInsets.symmetric(horizontal: gap['m']!, vertical: gap['l']!),
       child: ListView(
+        controller: _scrollController,
         children: [
           ..._createListView(),
+          ElevatedButton(
+            onPressed: () {
+              _scrollController.animateTo(
+                1000.0,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
+            },
+            child: const Text('back to top'),
+          ),
         ],
       ),
     );

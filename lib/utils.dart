@@ -1,5 +1,8 @@
 // common utils
+import 'dart:async';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 final Map<String, double> gap = <String, double>{
   's': 4.0,
@@ -21,4 +24,17 @@ String getRandomImageUrl() {
   ];
   final int randomIndex = Random().nextInt(assets.length).toInt();
   return assets.elementAt(randomIndex);
+}
+
+class Debounce {
+  final int milliseconds;
+  VoidCallback? action;
+  Timer? _timer;
+
+  Debounce({required this.milliseconds});
+
+  run(VoidCallback action) {
+    _timer?.cancel();
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
 }

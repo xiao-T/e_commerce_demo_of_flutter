@@ -3,17 +3,18 @@
 import 'package:flutter/material.dart';
 
 class SimpleMasonryView extends StatelessWidget {
-  const SimpleMasonryView({
+  double spacing;
+
+  SimpleMasonryView({
     Key? key,
     required this.countOfColumn,
     required this.items,
     required this.itemBuilder,
-    spacing,
+    this.spacing = 16.0,
   }) : super(key: key);
 
   final int countOfColumn;
   final List<dynamic> items;
-  final double spacing = 8.0;
   final Widget Function(dynamic) itemBuilder;
 
   List<dynamic> _createItemGroup(int startIndex) {

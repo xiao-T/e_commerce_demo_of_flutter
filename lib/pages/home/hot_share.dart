@@ -84,7 +84,6 @@ class HotShare extends StatelessWidget {
               right: gap['l']!,
             ),
             child: SimpleMasonryView(
-              spacing: 0,
               countOfColumn: 2,
               items: _products,
               itemBuilder: (dynamic item) {
