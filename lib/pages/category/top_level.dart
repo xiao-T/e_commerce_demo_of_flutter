@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:e_mall_demo/pages/category/read_countries_JSON.dart';
+import 'package:e_mall_demo/pages/category/utils.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,11 @@ class TopLevel extends StatefulWidget {
   String currentCountryName;
   TopLevel({
     Key? key,
+    required this.onCountryChange,
     this.currentCountryName = '',
   }) : super(key: key);
 
+  Function onCountryChange;
   @override
   State<TopLevel> createState() => _TopLevelState();
 }
@@ -42,26 +45,11 @@ class _TopLevelState extends State<TopLevel> {
       _currentCountry = country['name'];
     });
     _scrollIntoView(_currentCountry);
+    widget.onCountryChange(country);
   }
 
   void _scrollIntoView(String countryName) {
-    GlobalKey key = GlobalKey();
-    for (var i = 0; i < _countries.length; i++) {
-      final country = _countries.elementAt(i);
-      if (country['name'] == countryName) {
-        key = country['key'];
-        break;
-      }
-    }
-    if (key.currentContext != null) {
-      Scrollable.ensureVisible(
-        key.currentContext!,
-        alignment: 0.9,
-        duration: const Duration(
-          milliseconds: 500,
-        ),
-      );
-    }
+    scrollIntoView(countryName, _countries);
   }
 
   List<Widget> _createListView() {
@@ -126,7 +114,6 @@ class _TopLevelState extends State<TopLevel> {
         ],
       ),
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

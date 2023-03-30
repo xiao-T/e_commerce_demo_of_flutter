@@ -1,27 +1,33 @@
 // category sub level
 import 'dart:math';
 import 'package:e_mall_demo/pages/category/read_countries_JSON.dart';
+import 'package:e_mall_demo/pages/category/utils.dart';
 import 'package:e_mall_demo/styles.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
 final debounce = Debounce(milliseconds: 100);
-List countryItemKeys = [];
 final subLevelContainer = GlobalKey();
 Future randomData(count) async {
   final countries = await readCountriesJSON();
   for (var i = 0; i < countries.length; i++) {
     final randomCityCount = Random().nextInt(count) + (count ~/ 2);
-    countries.elementAt(i)['cities'] =
-        List.generate(randomCityCount.toInt(), (i) => i);
+    final country = countries.elementAt(i);
+    country['key'] = GlobalKey(debugLabel: country['name']);
+    country['cities'] = List.generate(randomCityCount.toInt(), (i) => i);
   }
   return countries;
 }
 
 class SubLevel extends StatefulWidget {
-  SubLevel({Key? key, this.onScrollCallback}) : super(key: key);
+  String currentCountryName;
+  SubLevel({
+    Key? key,
+    required this.onScrollCallback,
+    this.currentCountryName = '',
+  }) : super(key: key);
 
-  Function? onScrollCallback;
+  Function onScrollCallback;
   @override
   State<SubLevel> createState() => _SubLevelState();
 }
@@ -63,14 +69,10 @@ class _SubLevelState extends State<SubLevel> {
 
   List<Widget> _createListView() {
     List<Widget> list = [];
-    // reset list
-    countryItemKeys = [];
     for (var country in _countriesWithCities) {
-      final cityItemKey = GlobalKey(debugLabel: country['name']);
-      countryItemKeys.add(cityItemKey);
       list.add(
         Column(
-          key: cityItemKey,
+          key: country['key'],
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -89,6 +91,7 @@ class _SubLevelState extends State<SubLevel> {
               padding: EdgeInsets.only(bottom: gap['l']!),
               child: Wrap(
                 spacing: gap['m']!,
+                runSpacing: gap['m']!,
                 children: [
                   ..._createSubCityItem(country['cities']),
                 ],
@@ -111,7 +114,7 @@ class _SubLevelState extends State<SubLevel> {
   // scroll event
   void _handleScrollEvent() {
     debounce.run(() {
-      widget.onScrollCallback!(_findVisibleItem());
+      widget.onScrollCallback(_findVisibleItem());
     });
   }
 
@@ -126,17 +129,20 @@ class _SubLevelState extends State<SubLevel> {
   // layout completed callback
   Map<String, dynamic> _findVisibleItem() {
     Map<String, dynamic> currentCountry = {};
-    for (var i = 0; i < countryItemKeys.length; i++) {
-      GlobalKey key = countryItemKeys.elementAt(i);
+    for (var i = 0; i < _countriesWithCities.length; i++) {
+      GlobalKey key = _countriesWithCities.elementAt(i)['key'];
       Offset? offset = _getItemPosition(key);
       if (offset != null && offset.dy > 0) {
         currentCountry = _countriesWithCities.elementAt(i);
-        currentCountry['key'] = key;
         currentCountry['offset'] = offset;
         break;
       }
     }
     return currentCountry;
+  }
+
+  void _scrollIntoView(String countryName) {
+    scrollIntoView(countryName, _countriesWithCities, alignment: 0.0);
   }
 
   @override
@@ -151,6 +157,12 @@ class _SubLevelState extends State<SubLevel> {
   }
 
   @override
+  void didUpdateWidget(covariant SubLevel oldWidget) {
+    _scrollIntoView(widget.currentCountryName);
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _scrollController.removeListener(_handleScrollEvent);
     super.dispose();
@@ -161,21 +173,13 @@ class _SubLevelState extends State<SubLevel> {
     return Container(
       key: subLevelContainer,
       padding: EdgeInsets.symmetric(horizontal: gap['m']!, vertical: gap['l']!),
-      child: ListView(
+      child: SingleChildScrollView(
         controller: _scrollController,
-        children: [
-          ..._createListView(),
-          ElevatedButton(
-            onPressed: () {
-              _scrollController.animateTo(
-                1000.0,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              );
-            },
-            child: const Text('back to top'),
-          ),
-        ],
+        child: Column(
+          children: [
+            ..._createListView(),
+          ],
+        ),
       ),
     );
   }

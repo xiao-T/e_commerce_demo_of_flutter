@@ -11,6 +11,13 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   String _currentCountryName = '';
+
+  void _resetCurrentCountry(country) {
+    setState(() {
+      _currentCountryName = country['name'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +30,16 @@ class _CategoryPageState extends State<CategoryPage> {
           SizedBox(
             width: 120.0,
             child: TopLevel(
-              currentCountryName: _currentCountryName,
-            ),
+                currentCountryName: _currentCountryName,
+                onCountryChange: (currentCountry) {
+                  _resetCurrentCountry(currentCountry);
+                }),
           ),
           Expanded(
             child: SubLevel(
+              currentCountryName: _currentCountryName,
               onScrollCallback: (currentCountry) {
-                setState(() {
-                  _currentCountryName = currentCountry['name'];
-                });
+                _resetCurrentCountry(currentCountry);
               },
             ),
           ),
