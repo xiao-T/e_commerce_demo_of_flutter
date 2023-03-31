@@ -8,11 +8,11 @@ class Carousel extends StatelessWidget {
   Carousel({Key? key}) : super(key: key);
 
   final List _assets = [
-    {'url': 'https://picsum.photos/id/27/800/450', 'id': '1'},
-    {'url': 'https://picsum.photos/id/33/800/450', 'id': '2'},
-    {'url': 'https://picsum.photos/id/32/800/450', 'id': '3'},
-    {'url': 'https://picsum.photos/id/34/800/450', 'id': '4'},
-    {'url': 'https://picsum.photos/id/33/800/450', 'id': '5'},
+    {'url': 'https://picsum.photos/id/27/800/1000', 'id': '1'},
+    {'url': 'https://picsum.photos/id/33/800/1000', 'id': '2'},
+    {'url': 'https://picsum.photos/id/32/800/1000', 'id': '3'},
+    {'url': 'https://picsum.photos/id/34/800/1000', 'id': '4'},
+    {'url': 'https://picsum.photos/id/33/800/1000', 'id': '5'},
   ];
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class Carousel extends StatelessWidget {
       options: CarouselOptions(
         enlargeCenterPage: true,
         enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-        aspectRatio: 16 / 9,
+        aspectRatio: 4 / 5,
         autoPlay: true,
       ),
       items: _assets.map((asset) {

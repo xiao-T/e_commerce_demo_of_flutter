@@ -8,28 +8,25 @@ import 'hot_share.dart';
 import 'carousel.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: ListView(
-        children: [
-          Carousel(),
-          const Divider(
-            height: 2.0,
-          ),
-          Iconic(),
-          const NewArrival(),
-          HotWords(),
-          const TopSale(),
-          HotShare(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Carousel(),
+            const Divider(
+              height: 2.0,
+            ),
+            Iconic(),
+            const NewArrival(),
+            HotWords(),
+            const TopSale(),
+            HotShare(),
+          ],
+        ),
       ),
     );
   }
