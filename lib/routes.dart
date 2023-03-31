@@ -7,14 +7,14 @@ import 'pages/home/home.dart';
 // category page
 import './pages/category/category.dart';
 import './pages/category/detail.dart';
-import './pages/about.dart';
+import 'pages/about/about.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 final GoRouter shellRoute = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/category',
+  initialLocation: '/about',
   routes: <RouteBase>[
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

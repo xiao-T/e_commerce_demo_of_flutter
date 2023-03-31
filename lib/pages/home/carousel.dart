@@ -28,7 +28,7 @@ class Carousel extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: gap['s']!),
           decoration: const BoxDecoration(
-            color: Colors.red,
+            color: Colors.black12,
           ),
           child: Stack(
             children: [
