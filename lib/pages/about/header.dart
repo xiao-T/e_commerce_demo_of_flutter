@@ -1,6 +1,11 @@
 // header for profile
+import 'dart:ui';
+
+import 'package:e_mall_demo/models/user_info.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'edit_form.dart';
 
 class Header extends StatelessWidget {
   const Header({Key? key}) : super(key: key);
@@ -8,75 +13,123 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    const String eMail = '270199332 at qq.com';
-    return Stack(
-      // clipBehavior: Clip.none,
-      alignment: const Alignment(0.0, 1.8),
-      children: [
-        Container(
-          height: 290.0,
-          width: double.infinity,
-          padding: const EdgeInsets.only(bottom: 50.0),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage('https://picsum.photos/id/137/600/400'),
-            ),
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 80.0,
-              height: 80.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(80.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black38,
-                    blurRadius: gap['m']!,
-                    offset: const Offset(0, 0),
-                  ),
-                ],
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage('https://picsum.photos/id/137/600/400'),
-                ),
+    final userInfoProvider = context.watch<UserInfoModel>();
+    return SizedBox(
+      height: 370.0,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            height: 290.0,
+            clipBehavior: Clip.hardEdge,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage('https://picsum.photos/id/137/600/400'),
               ),
             ),
-            Text(
-              'XiaoT',
-              style: Theme.of(context).textTheme.headlineSmall?.merge(
-                    TextStyle(
-                      shadows: [
-                        Shadow(
-                          color: Colors.black26,
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+            child: const SizedBox(
+              height: 290.0,
+            ),
+          ),
+          Positioned(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.bottomRight,
+                  width: 80.0,
+                  height: 80.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(80.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: gap['m']!,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          NetworkImage('https://picsum.photos/id/137/600/400'),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(gap['s']!),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black38,
                           blurRadius: gap['m']!,
                           offset: const Offset(0, 0),
                         ),
                       ],
                     ),
-                  ),
-            ),
-            SelectableText(
-              eMail,
-              style: Theme.of(context).textTheme.bodyLarge?.merge(
-                    TextStyle(
-                      shadows: [
-                        Shadow(
-                          color: Colors.black26,
-                          blurRadius: gap['m']!,
-                          offset: const Offset(0, 0),
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return const EditForm();
+                          },
+                        );
+                      },
+                      child: AbsorbPointer(
+                        child: Icon(
+                          Icons.edit_square,
+                          size: gap['l']!,
+                          color: Theme.of(context).primaryColor,
                         ),
-                      ],
+                      ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: gap['l']!,
+                ),
+                Text(
+                  userInfoProvider.username,
+                  style: Theme.of(context).textTheme.headlineSmall?.merge(
+                        TextStyle(
+                          shadows: [
+                            Shadow(
+                              color: Colors.black26,
+                              blurRadius: gap['m']!,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
+                        ),
+                      ),
+                ),
+                SelectableText(
+                  userInfoProvider.email,
+                  style: Theme.of(context).textTheme.bodyLarge?.merge(
+                        TextStyle(
+                          shadows: [
+                            Shadow(
+                              color: Colors.black26,
+                              blurRadius: gap['m']!,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
+                        ),
+                      ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
