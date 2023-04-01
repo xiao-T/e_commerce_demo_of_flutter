@@ -98,7 +98,7 @@ class Header extends StatelessWidget {
                   height: gap['l']!,
                 ),
                 Text(
-                  userInfoProvider.username,
+                  userInfoProvider.profile['username']!,
                   style: Theme.of(context).textTheme.headlineSmall?.merge(
                         TextStyle(
                           shadows: [
@@ -112,7 +112,7 @@ class Header extends StatelessWidget {
                       ),
                 ),
                 SelectableText(
-                  userInfoProvider.email,
+                  userInfoProvider.profile['email']!,
                   style: Theme.of(context).textTheme.bodyLarge?.merge(
                         TextStyle(
                           shadows: [
