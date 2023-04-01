@@ -1,9 +1,10 @@
 // edit profile
-
+import 'dart:io';
 import 'dart:async';
 
 import 'package:e_mall_demo/models/user_info.dart';
 import 'package:e_mall_demo/utils.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,21 @@ class EditForm extends StatefulWidget {
 class _EditFormState extends State<EditForm> {
   final _formKey = GlobalKey<FormState>();
   double _rotateY = 2.5;
+
+  // final File _customAvatarFile = File('assets/images/user.png');
+  Future _pickAnImage() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      print(file);
+      // setState(() {
+      //   _customAvatarFile = file;
+      // });
+    }
+  }
+
   @override
   void initState() {
     Timer.periodic(const Duration(milliseconds: 20), (timer) {
@@ -42,6 +58,7 @@ class _EditFormState extends State<EditForm> {
       child: Dialog(
         child: Form(
           key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Container(
             padding: EdgeInsets.all(gap['l']!),
             child: Column(
@@ -50,6 +67,36 @@ class _EditFormState extends State<EditForm> {
                 Text(
                   'Edit Profile',
                   style: Theme.of(context).textTheme.labelLarge,
+                ),
+                SizedBox(
+                  height: gap['m']!,
+                ),
+                // Image.file(_customAvatarFile),
+                GestureDetector(
+                  onTap: () {
+                    _pickAnImage();
+                    print('tap avatar to pick new image');
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(gap['m']!),
+                    width: 80.0,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(80.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black38,
+                          blurRadius: gap['m']!,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image:
+                            NetworkImage(userInfoProvider.profile['avatar']!),
+                      ),
+                    ),
+                  ),
                 ),
                 TextFormField(
                   validator: (value) {

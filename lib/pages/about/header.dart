@@ -24,10 +24,10 @@ class Header extends StatelessWidget {
             height: 290.0,
             clipBehavior: Clip.hardEdge,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage('https://picsum.photos/id/137/600/400'),
+                image: NetworkImage(userInfoProvider.profile['avatar']!),
               ),
             ),
           ),
@@ -55,10 +55,9 @@ class Header extends StatelessWidget {
                         offset: const Offset(0, 0),
                       ),
                     ],
-                    image: const DecorationImage(
+                    image: DecorationImage(
                       fit: BoxFit.cover,
-                      image:
-                          NetworkImage('https://picsum.photos/id/137/600/400'),
+                      image: NetworkImage(userInfoProvider.profile['avatar']!),
                     ),
                   ),
                   child: Container(
