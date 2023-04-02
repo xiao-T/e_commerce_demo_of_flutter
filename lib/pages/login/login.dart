@@ -128,7 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                                       testAccount['username'] &&
                                   _loginInfo['pwd'] == testAccount['pwd']) {
                                 loginProvider.update(true);
-                                context.go('/about');
+                                String? from = GoRouterState.of(context)
+                                    .queryParams['from'];
+                                context.go(from!);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(

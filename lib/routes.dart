@@ -67,12 +67,10 @@ GoRouter shellRoute = GoRouter(
           },
           redirect: (BuildContext context, GoRouterState state) {
             var loginProvider = context.read<LoginModel>();
-            // authGurad(context, state);
             if (loginProvider.isSignedIn) {
               return null;
             } else {
-              return '/login';
-              // return shellRoute.namedLocation('/login');
+              return '/login?from=${state.location}';
             }
           },
         ),
@@ -91,8 +89,3 @@ GoRouter shellRoute = GoRouter(
     ),
   ],
 );
-
-// String authGurad(BuildContext context, GoRouterState) {
-//   print(shellRoute.namedLocation('login'));
-//   return '';
-// }
