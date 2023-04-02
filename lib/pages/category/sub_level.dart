@@ -43,26 +43,7 @@ class _SubLevelState extends State<SubLevel> {
     final double itemWidth = (containerWidth! - (gap['m']! * 4)) / 3;
     List<Widget> items = [];
     items = cities.map<Widget>((item) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.black12,
-            ),
-            child: Image(
-              width: itemWidth,
-              height: itemWidth,
-              fit: BoxFit.cover,
-              image: NetworkImage(getRandomImageUrl()),
-            ),
-          ),
-          SizedBox(
-            height: gap['s']!,
-          ),
-          Text('City No. $item'),
-        ],
-      );
+      return CityCard(no: item, width: itemWidth);
     }).toList();
     return items;
   }
@@ -181,6 +162,44 @@ class _SubLevelState extends State<SubLevel> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CityCard extends StatefulWidget {
+  CityCard({Key? key, required this.no, required this.width}) : super(key: key);
+
+  int no = 0;
+  double width = 0;
+
+  @override
+  State<CityCard> createState() => _CityCardState();
+}
+
+class _CityCardState extends State<CityCard> {
+  final String _imageUrl = getRandomImageUrl();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.black12,
+          ),
+          child: Image(
+            width: widget.width,
+            height: widget.width,
+            fit: BoxFit.cover,
+            image: NetworkImage(_imageUrl),
+          ),
+        ),
+        SizedBox(
+          height: gap['s']!,
+        ),
+        Text('City No. ${widget.no}'),
+      ],
     );
   }
 }

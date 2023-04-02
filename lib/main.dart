@@ -27,7 +27,7 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Flutter E-Mall Demo',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          canvasColor: Colors.white,
           // useMaterial3: true,
           primarySwatch: Colors.deepOrange,
           indicatorColor: Colors.black,

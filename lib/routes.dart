@@ -1,5 +1,6 @@
 // App routes
 import 'package:e_mall_demo/models/login.dart';
+import 'package:e_mall_demo/pages/shopping/shopping.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 GoRouter shellRoute = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/',
+  initialLocation: '/shopping',
   routes: <RouteBase>[
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
@@ -59,6 +60,18 @@ GoRouter shellRoute = GoRouter(
           ],
         ),
         GoRoute(
+          path: '/shopping',
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return const NoTransitionPage(
+              child: Shopping(),
+            );
+          },
+          redirect: (BuildContext context, GoRouterState state) {
+            return null;
+            // return authGuard(context, state);
+          },
+        ),
+        GoRoute(
           path: '/about',
           pageBuilder: (BuildContext context, GoRouterState state) {
             return const NoTransitionPage(
@@ -66,21 +79,13 @@ GoRouter shellRoute = GoRouter(
             );
           },
           redirect: (BuildContext context, GoRouterState state) {
-            var loginProvider = context.read<LoginModel>();
-            if (loginProvider.isSignedIn) {
-              return null;
-            } else {
-              return '/login?from=${state.location}';
-            }
+            return authGuard(context, state);
           },
         ),
       ],
     ),
     GoRoute(
       path: '/login',
-      // builder: (BuildContext context, GoRouterState state) {
-      //   return const LoginPage();
-      // },
       pageBuilder: (BuildContext context, GoRouterState state) {
         return const SliderPageRouteBuilder(
           child: LoginPage(),
@@ -89,3 +94,12 @@ GoRouter shellRoute = GoRouter(
     ),
   ],
 );
+
+String? authGuard(BuildContext context, GoRouterState state) {
+  var loginProvider = context.read<LoginModel>();
+  if (loginProvider.isSignedIn) {
+    return null;
+  } else {
+    return '/login?from=${state.location}';
+  }
+}
