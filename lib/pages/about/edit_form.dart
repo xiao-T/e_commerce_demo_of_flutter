@@ -130,6 +130,7 @@ class _EditFormState extends State<EditForm> {
                     value,
                   ),
                   initialValue: userInfoProvider.profile['email'],
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.email),
                     labelText: 'Email',
