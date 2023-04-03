@@ -30,6 +30,10 @@ class App extends StatelessWidget {
         title: 'Flutter E-Mall Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
+          dialogTheme: const DialogTheme(
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.white,
+          ),
           useMaterial3: true,
           indicatorColor: Colors.black,
           tabBarTheme: const TabBarTheme(

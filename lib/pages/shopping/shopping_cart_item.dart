@@ -86,7 +86,9 @@ class _ShoppingCartItemState extends State<ShoppingCartItem> {
                     value: _checked,
                     onChanged: (value) {
                       shoppingCartProvider.updateSingleProduct(
-                          value, product['id']);
+                        value,
+                        product,
+                      );
                     },
                   ),
                 ),

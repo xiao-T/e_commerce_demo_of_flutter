@@ -58,9 +58,11 @@ class ShoppingCartModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSingleProduct(bool? status, String productId) {
-    for (var product in _products) {
-      if (product['id'] == productId) {
+  void updateSingleProduct(bool? status, Map product) {
+    for (var p in _products) {
+      if (p['id'] == product['id'] &&
+          p['size'] == product['size'] &&
+          p['qty'] == product['qty']) {
         product['selected'] = status;
       }
     }
