@@ -65,7 +65,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
                   : null,
               child: const Icon(Icons.shopping_cart),
             ),
-            label: 'Shopping',
+            label: 'Cart',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.person),

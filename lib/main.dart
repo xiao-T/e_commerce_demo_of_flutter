@@ -29,17 +29,17 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Flutter E-Mall Demo',
         theme: ThemeData(
-          canvasColor: Colors.white,
-          // useMaterial3: true,
-          primarySwatch: Colors.deepOrange,
+          scaffoldBackgroundColor: Colors.white,
+          useMaterial3: true,
           indicatorColor: Colors.black,
           tabBarTheme: const TabBarTheme(
             labelColor: Colors.black,
             unselectedLabelColor: Colors.black38,
             indicatorSize: TabBarIndicatorSize.label,
           ),
-          // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.white,
             selectedItemColor: Colors.black,
             unselectedItemColor: Colors.black38,
           ),

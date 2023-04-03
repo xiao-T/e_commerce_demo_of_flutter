@@ -15,13 +15,15 @@ import './pages/category/detail.dart';
 import 'pages/about/about.dart';
 // login
 import 'pages/login/login.dart';
+// product detail
+import 'pages/product/detail.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 GoRouter shellRoute = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/shopping',
+  initialLocation: '/',
   routes: <RouteBase>[
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
@@ -67,8 +69,7 @@ GoRouter shellRoute = GoRouter(
             );
           },
           redirect: (BuildContext context, GoRouterState state) {
-            return null;
-            // return authGuard(context, state);
+            return authGuard(context, state);
           },
         ),
         GoRoute(
@@ -91,6 +92,12 @@ GoRouter shellRoute = GoRouter(
           child: LoginPage(),
         );
       },
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: '/product/:id',
+      builder: (BuildContext context, GoRouterState state) =>
+          ProductDetail(id: state.params['id']),
     ),
   ],
 );

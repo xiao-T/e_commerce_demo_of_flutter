@@ -1,4 +1,5 @@
 // base info for profile
+import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
 class BaseInfo extends StatelessWidget {
@@ -34,7 +35,9 @@ class BaseInfoCard extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.bodySmall,
         ),
-        const Divider(),
+        SizedBox(
+          height: gap['m']!,
+        ),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyLarge,

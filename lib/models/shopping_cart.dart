@@ -2,39 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-List<dynamic> defaultProducts = [
-  {
-    'id': '1',
-    'url': 'https://picsum.photos/id/27/400/400',
-    'price': '13.89',
-    'qty': 1,
-    'selected': true,
-  },
-  {
-    'id': '2',
-    'url': 'https://picsum.photos/id/32/400/400',
-    'price': '32.00',
-    'qty': 1,
-    'selected': true,
-  },
-  {
-    'id': '3',
-    'url': 'https://picsum.photos/id/33/400/400',
-    'price': '14.80',
-    'qty': 1,
-    'selected': !true,
-  },
-  {
-    'id': '4',
-    'url': 'https://picsum.photos/id/34/400/400',
-    'price': '34.50',
-    'qty': 2,
-    'selected': true,
-  },
-];
-
 class ShoppingCartModel with ChangeNotifier {
-  final List<dynamic> _products = [...defaultProducts];
+  final List<dynamic> _products = [];
   List<dynamic> get _selectedProducts =>
       _products.where((product) => product['selected']).toList();
 
@@ -61,7 +30,18 @@ class ShoppingCartModel with ChangeNotifier {
   }
 
   void add(product) {
-    _products.add(product);
+    bool hasSameProduct = false;
+    for (var i = 0; i < _products.length; i++) {
+      if (_products.elementAt(i)['id'] == product['id'] &&
+          _products.elementAt(i)['size'] == product['size']) {
+        hasSameProduct = true;
+        _products.elementAt(i)['qty'] += 1;
+        break;
+      }
+    }
+    if (!hasSameProduct) {
+      _products.add(product);
+    }
     notifyListeners();
   }
 

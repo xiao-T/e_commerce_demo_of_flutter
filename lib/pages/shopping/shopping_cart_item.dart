@@ -120,7 +120,7 @@ class _ShoppingCartItemState extends State<ShoppingCartItem> {
                           Column(
                             children: [
                               Text(
-                                'Size: L',
+                                'Size: ${product["size"]}',
                                 style: smallStyle,
                               ),
                               Text(

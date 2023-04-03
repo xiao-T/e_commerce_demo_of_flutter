@@ -2,6 +2,7 @@
 import 'package:e_mall_demo/styles.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 double productCardWidth = 0.0;
 const double totalGap = 90.0;
@@ -67,21 +68,25 @@ class TabContent extends StatelessWidget {
 
   final List _products = [
     {
+      'id': '1',
       'url': 'https://picsum.photos/id/27/400/400',
       'name': 'Paul Jarvis',
       'price': '132.89',
     },
     {
+      'id': '2',
       'url': 'https://picsum.photos/id/32/400/400',
       'name': 'Paul Jarvis',
       'price': '3432.00',
     },
     {
+      'id': '3',
       'url': 'https://picsum.photos/id/33/400/400',
       'name': 'Paul Jarvis',
       'price': '3554.80',
     },
     {
+      'id': '4',
       'url': 'https://picsum.photos/id/34/400/400',
       'name': 'Vadim Sherbakov',
       'price': '34.50',
@@ -93,28 +98,31 @@ class TabContent extends StatelessWidget {
       _listWidgets.add(
         SizedBox(
           width: productCardWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image(
-                height: productCardWidth,
-                image: NetworkImage(product['url']),
-              ),
-              SizedBox(
-                height: gap['s'],
-              ),
-              Text(
-                product['name'],
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-              SizedBox(
-                height: gap['s'],
-              ),
-              Text(
-                "价格：${product['price']}",
-                style: Theme.of(context).textTheme.displaySmall,
-              )
-            ],
+          child: GestureDetector(
+            onTap: () => context.push('/product/${product["id"]}'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image(
+                  height: productCardWidth,
+                  image: NetworkImage(product['url']),
+                ),
+                SizedBox(
+                  height: gap['s'],
+                ),
+                Text(
+                  product['name'],
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+                SizedBox(
+                  height: gap['s'],
+                ),
+                Text(
+                  "价格：${product['price']}",
+                  style: Theme.of(context).textTheme.displaySmall,
+                )
+              ],
+            ),
           ),
         ),
       );

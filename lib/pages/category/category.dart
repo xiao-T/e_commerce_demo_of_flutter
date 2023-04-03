@@ -22,7 +22,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Category Page'),
+        title: const Text('Category'),
       ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
