@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import './models/shopping_cart.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   final Widget child;
@@ -41,23 +44,30 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shoppingCartProvider = context.watch<ShoppingCartModel>();
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Badge(
+              smallSize: 0.0,
+              label: shoppingCartProvider.count > 0
+                  ? Text(shoppingCartProvider.count.toString())
+                  : null,
+              child: const Icon(Icons.shopping_cart),
+            ),
             label: 'Shopping',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'About',
           ),

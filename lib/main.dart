@@ -1,4 +1,5 @@
 import 'package:e_mall_demo/models/login.dart';
+import 'package:e_mall_demo/models/shopping_cart.dart';
 import 'package:e_mall_demo/models/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,8 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => LoginModel(),
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => ShoppingCartModel())
       ],
       child: MaterialApp.router(
         title: 'Flutter E-Mall Demo',

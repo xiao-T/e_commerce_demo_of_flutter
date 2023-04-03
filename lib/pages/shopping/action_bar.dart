@@ -2,11 +2,28 @@
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
+import 'package:e_mall_demo/models/shopping_cart.dart';
+import 'package:provider/provider.dart';
+
 class ActionBar extends StatelessWidget {
   const ActionBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final shoppingCartProvider = context.watch<ShoppingCartModel>();
+    bool? selectAllValue = true;
+
+    if (shoppingCartProvider.isAllSelected) {
+      selectAllValue = true;
+    }
+    if (!shoppingCartProvider.isAllSelected && shoppingCartProvider.count > 0) {
+      selectAllValue = null;
+    }
+    if (!shoppingCartProvider.isAllSelected &&
+        shoppingCartProvider.count == 0) {
+      selectAllValue = false;
+    }
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
@@ -31,28 +48,35 @@ class ActionBar extends StatelessWidget {
               Transform.scale(
                 scale: 0.8,
                 child: Checkbox(
-                  value: true,
+                  tristate: shoppingCartProvider.count > 0 &&
+                      !shoppingCartProvider.isAllSelected,
+                  value: selectAllValue,
                   onChanged: (value) {
-                    print('check all');
+                    shoppingCartProvider.selectAll(value);
                   },
                 ),
               ),
-              const Text('Select All'),
+              Text(
+                'Select All',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
             ],
           ),
           Row(
             children: [
               Text(
-                'Total: ¥143.34',
+                'Total: ¥${shoppingCartProvider.totalAmount}',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               SizedBox(
                 width: gap['m']!,
               ),
               ElevatedButton(
-                onPressed: () {
-                  print('checkout....');
-                },
+                onPressed: shoppingCartProvider.count > 0
+                    ? () {
+                        print('checkout....');
+                      }
+                    : null,
                 child: const Text('Checkout'),
               ),
             ],
