@@ -15,13 +15,13 @@ class Header extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final userInfoProvider = context.watch<UserInfoModel>();
     return SizedBox(
-      height: 370.0,
+      height: setResponseSize(320.0),
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
         children: [
           Container(
-            height: 290.0,
+            height: setResponseSize(230.0),
             clipBehavior: Clip.hardEdge,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -33,8 +33,8 @@ class Header extends StatelessWidget {
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-            child: const SizedBox(
-              height: 290.0,
+            child: SizedBox(
+              height: setResponseSize(230.0),
             ),
           ),
           Positioned(
@@ -44,10 +44,10 @@ class Header extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.bottomRight,
-                  width: 80.0,
-                  height: 80.0,
+                  width: setResponseSize(70.0),
+                  height: setResponseSize(70.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(80.0),
+                    borderRadius: BorderRadius.circular(setResponseSize(70.0)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black38,

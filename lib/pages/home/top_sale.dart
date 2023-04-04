@@ -99,7 +99,7 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     double itemWidth = MediaQuery.of(context).size.width / 3.5;
     return SizedBox(
-      height: 170.0,
+      height: setResponseSize(150.0),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [

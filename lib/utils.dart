@@ -11,6 +11,14 @@ final Map<String, double> gap = <String, double>{
   'xl': 32.0
 };
 
+// response size
+double setResponseSize(double originalSize) {
+  const double baseSize = 375;
+  double screenWidth =
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
+  return originalSize / baseSize * screenWidth;
+}
+
 String getRandomImageUrl() {
   final List assets = [
     'https://picsum.photos/id/27/600/600',

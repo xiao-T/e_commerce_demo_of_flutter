@@ -2,6 +2,7 @@
 import 'package:e_mall_demo/pages/about/base_info.dart';
 import 'package:e_mall_demo/pages/about/header.dart';
 import 'package:e_mall_demo/pages/about/skills.dart';
+import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
@@ -17,13 +18,13 @@ class AboutPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            Header(),
+          children: [
+            const Header(),
             SizedBox(
-              height: 30.0,
+              height: setResponseSize(20.0),
             ),
-            BaseInfo(),
-            Skills(),
+            const BaseInfo(),
+            const Skills(),
           ],
         ),
       ),

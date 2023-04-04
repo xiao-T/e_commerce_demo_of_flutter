@@ -76,7 +76,7 @@ class _ShoppingCartItemState extends State<ShoppingCartItem> {
             ),
           ),
           child: SizedBox(
-            height: 80.0,
+            height: setResponseSize(70.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -93,8 +93,8 @@ class _ShoppingCartItemState extends State<ShoppingCartItem> {
                   ),
                 ),
                 Image(
-                  width: 80.0,
-                  height: 80.0,
+                  width: setResponseSize(70.0),
+                  height: setResponseSize(70.0),
                   fit: BoxFit.cover,
                   image: NetworkImage(
                     _imageUrl,

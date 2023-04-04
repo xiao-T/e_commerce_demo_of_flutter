@@ -1,5 +1,6 @@
 import 'package:e_mall_demo/pages/category/sub_level.dart';
 import 'package:e_mall_demo/pages/category/top_level.dart';
+import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CategoryPageState extends State<CategoryPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            width: 120.0,
+            width: setResponseSize(105.0),
             child: TopLevel(
                 currentCountryName: _currentCountryName,
                 onCountryChange: (currentCountry) {

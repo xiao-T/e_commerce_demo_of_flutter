@@ -79,8 +79,8 @@ class _EditFormState extends State<EditForm> {
                   },
                   child: Container(
                     padding: EdgeInsets.all(gap['m']!),
-                    width: 80.0,
-                    height: 80.0,
+                    width: setResponseSize(70.0),
+                    height: setResponseSize(70.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(80.0),
                       boxShadow: [

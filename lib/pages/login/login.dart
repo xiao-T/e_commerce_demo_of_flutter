@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: gap['l']!,
                 ),
                 SizedBox(
-                  width: 200.0,
+                  width: setResponseSize(175.0),
                   child: ElevatedButton(
                     onPressed: _disabled
                         ? null

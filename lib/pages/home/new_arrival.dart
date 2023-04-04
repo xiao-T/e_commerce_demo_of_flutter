@@ -48,7 +48,7 @@ class NewArrivalTab extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 480.0,
+            height: setResponseSize(420.0),
             child: TabBarView(
               children: [
                 TabContent(),
