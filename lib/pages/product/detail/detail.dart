@@ -1,10 +1,10 @@
 // product detail page
-import 'package:e_mall_demo/pages/product/bottom_action_bar.dart';
-import 'package:e_mall_demo/pages/product/product_base_info.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import './carousel.dart';
+import './bottom_action_bar.dart';
+import './product_base_info.dart';
 
 class ProductDetail extends StatefulWidget {
   ProductDetail({Key? key, required this.id}) : super(key: key);
