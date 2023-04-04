@@ -10,20 +10,20 @@ import './scaffold_with_nav_bar.dart';
 import 'pages/home/home.dart';
 // category page
 import './pages/category/category.dart';
-import './pages/category/detail.dart';
 // profile
 import 'pages/about/about.dart';
 // login
 import 'pages/login/login.dart';
 // product detail
-import 'pages/product/detail.dart';
+import 'pages/product/detail/detail.dart';
+import 'pages/product/list/list.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 GoRouter shellRoute = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/',
+  initialLocation: '/product/list/test id',
   routes: <RouteBase>[
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
@@ -49,17 +49,6 @@ GoRouter shellRoute = GoRouter(
               child: CategoryPage(),
             );
           },
-          routes: <RouteBase>[
-            GoRoute(
-              path: ':id',
-              parentNavigatorKey: _rootNavigatorKey,
-              builder: (BuildContext context, GoRouterState state) {
-                return CategoryDetail(
-                  categoryId: state.params['id']!,
-                );
-              },
-            )
-          ],
         ),
         GoRoute(
           path: '/shopping',
@@ -98,6 +87,12 @@ GoRouter shellRoute = GoRouter(
       path: '/product/:id',
       builder: (BuildContext context, GoRouterState state) =>
           ProductDetail(id: state.params['id']),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: '/product/list/:listId',
+      builder: (BuildContext context, GoRouterState state) =>
+          ProductList(listId: state.params['listId']),
     ),
   ],
 );

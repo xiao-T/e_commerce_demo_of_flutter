@@ -5,6 +5,7 @@ import 'package:e_mall_demo/pages/category/utils.dart';
 import 'package:e_mall_demo/styles.dart';
 import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 final debounce = Debounce(milliseconds: 100);
 final subLevelContainer = GlobalKey();
@@ -181,25 +182,28 @@ class _CityCardState extends State<CityCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            color: Colors.black12,
+    return GestureDetector(
+      onTap: () => context.push('/product/list/${widget.no}'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.black12,
+            ),
+            child: Image(
+              width: widget.width,
+              height: widget.width,
+              fit: BoxFit.cover,
+              image: NetworkImage(_imageUrl),
+            ),
           ),
-          child: Image(
-            width: widget.width,
-            height: widget.width,
-            fit: BoxFit.cover,
-            image: NetworkImage(_imageUrl),
+          SizedBox(
+            height: gap['s']!,
           ),
-        ),
-        SizedBox(
-          height: gap['s']!,
-        ),
-        Text('City No. ${widget.no}'),
-      ],
+          Text('City No. ${widget.no}'),
+        ],
+      ),
     );
   }
 }
