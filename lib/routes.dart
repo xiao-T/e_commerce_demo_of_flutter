@@ -23,7 +23,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 GoRouter shellRoute = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/product/list/test id',
+  initialLocation: '/',
   routes: <RouteBase>[
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

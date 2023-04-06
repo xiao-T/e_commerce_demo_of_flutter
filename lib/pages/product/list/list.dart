@@ -3,6 +3,8 @@ import 'package:e_mall_demo/models/product_list.dart';
 import 'package:e_mall_demo/pages/product/list/Items.dart';
 import 'package:e_mall_demo/pages/product/list/head_filter.dart';
 import 'package:e_mall_demo/pages/product/list/reach_bottom_tip.dart';
+import 'package:e_mall_demo/pages/product/list/side_filter.dart';
+import 'package:e_mall_demo/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,7 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   bool _reachBottom = false;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void updateReachBottomStatus(bool newStatus) {
     setState(() {
       _reachBottom = newStatus;
@@ -30,10 +33,42 @@ class _ProductListState extends State<ProductList> {
     return ChangeNotifierProvider(
       create: (_) => ProductListModel(),
       child: Scaffold(
-        appBar: AppBar(title: Text('Product List: ${widget.listId}')),
+        key: _scaffoldKey,
+        appBar: AppBar(
+          actions: [
+            Container(),
+          ],
+          title: Text('Product List: ${widget.listId}'),
+        ),
         body: Column(
           children: [
-            const HeadFilter(),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: gap['m']!,
+                horizontal: gap['l']!,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: gap['m']!,
+                  )
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const HeadFilter(),
+                  GestureDetector(
+                    onTap: () {
+                      _scaffoldKey.currentState?.openEndDrawer();
+                    },
+                    child: const Text('More'),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Items(
                 onReachBottom: updateReachBottomStatus,
@@ -45,6 +80,7 @@ class _ProductListState extends State<ProductList> {
             ),
           ],
         ),
+        endDrawer: const SideFilter(),
       ),
     );
   }

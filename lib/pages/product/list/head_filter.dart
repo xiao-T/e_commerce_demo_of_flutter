@@ -43,27 +43,8 @@ class HeadFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productListProvider = context.watch<ProductListModel>();
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: gap['m']!,
-        horizontal: gap['l']!,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: gap['m']!,
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          Row(
-            children: _createFilter(productListProvider),
-          )
-        ],
-      ),
+    return Row(
+      children: _createFilter(productListProvider),
     );
   }
 }

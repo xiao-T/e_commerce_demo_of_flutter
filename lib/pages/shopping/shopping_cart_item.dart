@@ -120,6 +120,7 @@ class _ShoppingCartItemState extends State<ShoppingCartItem> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Size: ${product["size"]}',
