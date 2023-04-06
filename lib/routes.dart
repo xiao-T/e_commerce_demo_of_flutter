@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'common/slider_page_route_builder.dart';
-import './scaffold_with_nav_bar.dart';
+import 'common/scaffold_with_nav_bar.dart';
 import 'pages/home/home.dart';
 // category page
 import './pages/category/category.dart';
@@ -37,7 +37,7 @@ GoRouter shellRoute = GoRouter(
         GoRoute(
           path: '/',
           pageBuilder: (BuildContext context, GoRouterState state) {
-            return const NoTransitionPage(
+            return NoTransitionPage(
               child: HomePage(),
             );
           },

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import './models/shopping_cart.dart';
+import '../models/shopping_cart.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   final Widget child;
