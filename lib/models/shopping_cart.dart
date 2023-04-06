@@ -46,8 +46,16 @@ class ShoppingCartModel with ChangeNotifier {
   }
 
   void delete(product) {
-    int index = _products.indexOf(product);
-    _products.removeAt(index);
+    for (var i = 0; i < _products.length; i++) {
+      var ele = _products.elementAt(i);
+      if (ele['id'] == product['id'] &&
+          ele['size'] == product['size'] &&
+          ele['qty'] == product['qty']) {
+        _products.removeAt(i);
+        break;
+      }
+    }
+
     notifyListeners();
   }
 
